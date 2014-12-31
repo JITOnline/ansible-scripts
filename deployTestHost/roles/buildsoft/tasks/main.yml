@@ -101,9 +101,6 @@
 - name: Unpack golang
   shell: chdir={{ temp_dir }} tar -xzpf {{ golang_file }} -C /usr/local creates=/usr/local/{{ golang_dir }}
 
-- name: Symlink golang
-  file: src=/usr/local/{{ golang_dir }} dest=/usr/local/go state=link
-
 - name: Set GOROOT (shell)
   copy: src=gosetenv.sh dest=/etc/profile.d/
   
