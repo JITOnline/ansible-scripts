@@ -41,7 +41,7 @@
   git: repo={{ git_repo }} dest={{ temp_dir }}/hardtofind accept_hostkey=True depth=1
 
 - name: build hard to find code
-  shell: chdir={{ temp_dir }}/hardtofind ./install.sh
+  shell: chdir={{ temp_dir }}/hardtofind ./install.sh creates=/usr/local/bin/unicornscan
 
 # Setup virtualenv
 - name: Pull virtualenv
@@ -92,7 +92,7 @@
   shell: chdir={{ temp_dir }} unzip {{ scapy_file }} creates={{ scapy_dir }}
   
 - name: Install Scapy
-  shell: chdir={{ temp_dir }}/{{ scapy_dir }} python install setup.py && cp {{ temp_dir }}/{{ scapy_dir }}/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
+  shell: chdir={{ temp_dir }}/{{ scapy_dir }} python setup.py install && cp {{ temp_dir }}/{{ scapy_dir }}/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
 
 # Setup Golang
 - name: Retrieve golang
