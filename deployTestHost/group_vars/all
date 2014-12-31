@@ -12,9 +12,11 @@ iperf_repo: https://github.com/esnet/iperf.git
 scapy_dir: scapy-2.3.1
 scapy_file: {{ scapy_dir }}.zip
 scapy_url: http://bb.secdev.org/scapy/downloads/{{ scapy_file }}
-golang_file: go1.4.linux-amd64.tar.gz
+golang_dir: go1.4
+golang_file: {{ golang_dir }}.linux-amd64.tar.gz
 golang_url: https://storage.googleapis.com/golang/{{ golang_file }}
-nmap_file: nmap-6.47.tar.bz2
+nmap_dir: namp-6.47
+nmap_file: {{ nmap_dir }}.tar.bz2
 nmap_url: http://nmap.org/dist/{{ nmap_file }}
 ncftpclient_file: ncftp-3.2.5-src.tar.bz2
 ncftpclient_url: ftp://ftp.ncftp.com/ncftp/{{ ncftpclient_file }}
