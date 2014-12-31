@@ -122,6 +122,12 @@
 - name: Retrieve ncftpclient
   get_url: url={{ ncftpclient_url }} dest={{ temp_dir }}
 
+- name: Unpack ncftp client
+  shell: chdir={{ temp_dir }} tar -xf {{ ncftpclient_file }} creates={{ ncftpclient_dir }}
+  
+- name: Build and Install ncftp client
+  shell: chdir={{ temp_dir }}/{{ ncftpclient_dir }} ./configure && make && make install creates=/usr/local/bin/ncftp
+
 # Setup Nagios Plugins
 - name: Retrieve Nagios Plugins
   get_url: url={{ nagios_plugins_url }} dest={{ temp_dir }}
