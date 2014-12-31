@@ -15,8 +15,7 @@
    - automake
    - tcl-dev
    - libpcap-dev
-   - libgnutls-dev
-   - libgnutls28-dev
+   - gnutls-dev
    - libssl-dev
    - libmysqlclient-dev
    - cmake
