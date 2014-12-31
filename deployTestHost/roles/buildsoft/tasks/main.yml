@@ -53,14 +53,14 @@
   git: repo={{ hping_repo }} dest={{ temp_dir }}/hping accept_hostkey=True depth=1
 
 - name: Compile and install hping
-  shell: chdir {{ temp_dir }}/hping ./configure && make && make strip && make install creates=/usr/sbin/hping3
+  shell: chdir={{ temp_dir }}/hping ./configure && make && make strip && make install creates=/usr/sbin/hping3
 
 # Setup tcptraceroute
 - name: Pull tcptraceroute
   git: repo={{ tcptraceroute_repo }} dest={{ temp_dir }}/tcptraceroute accept_hostkey=True depth=1
   
 - name: Compile and install tcptraceroute
-  shell: chdir {{ temp_dir }}/tcptraceroute ./configure && make && make install creates=/usr/local/bin/tcptraceroute
+  shell: chdir={{ temp_dir }}/tcptraceroute ./configure && make && make install creates=/usr/local/bin/tcptraceroute
 
 # Setup fping
 - name: Pull fping
