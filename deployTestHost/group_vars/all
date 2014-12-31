@@ -1,4 +1,6 @@
 temp_dir: "/var/tmp"
+remoteuser: "ubuntu"
+
 
 git_repo: "https://github.com/jbackman/hardtofindcode.git"
 virtualenv_repo: "https://github.com/pypa/virtualenv.git"
