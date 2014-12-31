@@ -1,6 +1,12 @@
 - name: Create temp directory
   file: path={{ temp_dir }} state=directory
 
+- name: Create /usr/local/bin
+  file: path=/usr/local/bin state=directory
+  
+- name: Create /usr/local/sbin
+  file: path=/usr/local/sbin state=directory
+
 - name: "Install PreReq Debian"
   apt: name={{ item }} state=present
   with_items:
@@ -54,13 +60,34 @@
   
 - name: Unpack Scapy
   shell: chdir={{ temp_dir }} unzip {{ scapy_file }} creates={{ scapy_dir }}
+  
+- name: Install Scapy
+  shell: chdir={{ temp_dir }}/{{ scapy_dir }} python install setup.py && cp {{ temp_dir }}/{{ scapy_dir }}/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
 
 - name: Retrieve golang
   get_url: url={{ golang_url }} dest={{ temp_dir }}
 
+- name: Unpack golang
+  shell: chdir={{ temp_dir }} tar -xzpf {{ golang_file }} -C /usr/local creates=/usr/local/{{ golang_dir }}
+
+- name: Symlink golang
+  file: src=/usr/local/{{ golang_dir }} dest=/usr/local/go state=link
+
+- name: Set GOROOT (shell)
+  copy: src=go.sh dest=/etc/profile.d/
+  
+- name: Set GOROOT (csh)
+  copy: src=go.csh dest=/etc/profile.d/
+
 - name: Retrieve nmap
   get_url: url={{ nmap_url }} dest={{ temp_dir }}
 
+- name: Unpack NMAP
+  shell: chdir={{ temp_dir }} unzip {{ nmap_file }} creates={{ nmap_dir }}
+
+- name: Build and Install NMAP
+  shell: chdir={{ temp_dir }}/{{ nmap_dir }} ./configure && make && make install creates=/usr/local/bin/nmap
+  
 - name: Retrieve ncftpclient
   get_url: url={{ ncftpclient_url }} dest={{ temp_dir }}
 
