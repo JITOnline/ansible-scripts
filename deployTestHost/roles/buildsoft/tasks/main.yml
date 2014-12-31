@@ -1,0 +1,65 @@
+- name: Create temp directory
+  file: path={{ temp_dir }} state=directory
+
+- name: "Install PreReq Debian"
+  apt: name={{ item }} state=present
+  with_items:
+   - git
+   - unzip
+   - automake
+   - tcl-dev
+   - libpcap-dev
+   - libgnutls-dev
+   - libgnutls28-dev
+   - libssl-dev
+   - libmysqlclient-dev
+   - cmake
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: "Install PreReq RHEL/CentOS"
+  yum: name={{ item }} state=present
+  with_items:
+   - git
+   - unzip
+   - automake
+   - openssl-devel
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Fix pcap header libraries for fping
+  file: src=/usr/include/pcap/bpf.h dest=/usr/include/net/bpf.h state=link
+
+- name: Pull hard to find code from GIT
+  git: repo={{ git_repo }} dest={{ temp_dir }}/hardtofind accept_hostkey=True depth=1
+
+- name: Pull virtualenv
+  git: repo={{ virtualenv_repo }} dest={{ temp_dir }}/virtualenv accept_hostkey=True depth=1
+
+- name: Pull hping
+  git: repo={{ hping_repo }} dest={{ temp_dir }}/hping accept_hostkey=True depth=1
+
+- name: Pull tcptraceroute
+  git: repo={{ tcptraceroute_repo }} dest={{ temp_dir }}/tcptraceroute accept_hostkey=True depth=1
+
+- name: Pull fping
+  git: repo={{ fping_repo }} dest={{ temp_dir }}/fping accept_hostkey=True depth=1
+
+- name: Pull tcpreplay
+  git: repo={{ tcpreplay_repo }} dest={{ temp_dir }}/tcpreplay accept_hostkey=True depth=1
+
+- name: Pull iperf
+  git: repo={{ iperf_repo }} dest={{ temp_dir }}/iperf accept_hostkey=True depth=1
+
+- name: Retrieve Scapy
+  get_url: url={{ scapy_dl }} dest={{ temp_dir }}
+
+- name: Retrieve golang
+  get_url: url={{ golang_dl }} dest={{ temp_dir }}
+
+- name: Retrieve nmap
+  get_url: url={{ nmap_dl }} dest={{ temp_dir }}
+
+- name: Retrieve ncftpclient
+  get_url: url={{ ncftpclient_dl }} dest={{ temp_dir }}
+
+- name: Retrieve Nagios Plugins
+  get_url: url={{ nagios_plugins }} dest={{ temp_dir }}

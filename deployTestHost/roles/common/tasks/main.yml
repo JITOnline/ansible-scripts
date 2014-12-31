@@ -1,0 +1,52 @@
+- name: "Perform APT update"
+  apt: upgrade=dist
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: "Perform YUM update"
+  yum: name=* state=latest
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Install Development Tools Debian"
+  apt: name=build-essential state=present
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: "Install Development Tools RHEL/CentOS"
+  yum: name="@Development tools" state=present
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Disable IPv6 part 1"
+  lineinfile: dest=/etc/sysctl.conf state=present line="net.ipv6.conf.all.disable_ipv6 = 1"
+
+- name: "Disable IPv6 part 2"
+  lineinfile: dest=/etc/sysctl.conf state=present line="net.ipv6.conf.default.disable_ipv6 = 1"
+
+- name: "Disable IPv6 part 3"
+  lineinfile: dest=/etc/sysctl.conf state=present line="net.ipv6.conf.lo.disable_ipv6 = 1" 
+
+- name: "Disable Selinux RHEL/Centos"
+  replace: dest=/etc/sysconfig/selinux regex='^SELINUX=.*' replace='SELINUX=disabled'
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Install Debian services"
+  apt: name={{ item }} state=present
+  with_items:
+   - ntp
+   - libpam-google-authenticator
+   - knockd
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: "Install RHEL/CentOS services"
+  yum: name={{ item }} state=present
+  with_items:
+   - ntp
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Set Ubuntu SSH Server Config"
+  copy: src=ubuntu_sshd_config dest=/etc/ssh/sshd_config
+  notify: restart sshd
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: "Set Centos/RHEL SSH Server Config"
+  copy: src=centos_sshd_config dest=/etc/ssh/sshd_config
+  notify: restart sshd
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

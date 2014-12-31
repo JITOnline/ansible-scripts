@@ -1,0 +1,9 @@
+---
+- name: Install testing server
+  hosts: test_hosts
+  remote_user: ubuntu
+  sudo: yes
+
+  roles:
+    - common
+    - buildsoft

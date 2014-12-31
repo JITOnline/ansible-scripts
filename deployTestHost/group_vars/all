@@ -1,0 +1,16 @@
+temp_dir: "/var/tmp"
+
+git_repo: "https://github.com/jbackman/hardtofindcode.git"
+virtualenv_repo: "https://github.com/pypa/virtualenv.git"
+hping_repo: "https://github.com/antirez/hping.git"
+tcptraceroute_repo: "https://github.com/mct/tcptraceroute.git"
+fping_repo: "https://github.com/schweikert/fping.git"
+tcpreplay_repo: "https://github.com/synfinatic/tcpreplay.git"
+iperf_repo: "https://github.com/esnet/iperf.git"
+
+scapy_dl: "http://bb.secdev.org/scapy/downloads/scapy-2.3.1.zip"
+golang_dl: "https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz"
+nmap_dl: "http://nmap.org/dist/nmap-6.47.tar.bz2"
+ncftpclient_dl: "ftp://ftp.ncftp.com/ncftp/ncftp-3.2.5-src.tar.bz2"
+nagios_plugins: "http://www.nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz"
+
