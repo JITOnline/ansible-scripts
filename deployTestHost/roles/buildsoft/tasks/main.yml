@@ -36,14 +36,6 @@
 
 - name: Fix pcap header libraries for fping
   file: src=/usr/include/pcap/bpf.h dest=/usr/include/net/bpf.h state=link
-  
-- name: Fix automake names for tcptraceroute (Debian)
-  file: src=/usr/bin/automake dest=/usr/bin/automake-1.4 state=link
-  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  
-- name: Fix aclocal names for tcptraceroute (Debian)
-  file: src=/usr/bin/aclocal dest=/usr/bin/aclocal-1.4 state=link
-  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Pull hard to find code from GIT
   git: repo={{ git_repo }} dest={{ temp_dir }}/hardtofind accept_hostkey=True depth=1
@@ -68,9 +60,17 @@
 # Setup tcptraceroute
 - name: Pull tcptraceroute
   git: repo={{ tcptraceroute_repo }} dest={{ temp_dir }}/tcptraceroute accept_hostkey=True depth=1
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   
 - name: Compile and install tcptraceroute
   shell: chdir={{ temp_dir }}/tcptraceroute ./configure && make && make install creates=/usr/local/bin/tcptraceroute
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  
+- name: "Install tcptraceroute (Ubuntu)"
+  apt: name={{ item }} state=present
+  with_items:
+   - tcptraceroute
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 # Setup fping
 - name: Pull fping
