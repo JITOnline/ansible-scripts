@@ -21,6 +21,7 @@ nmap_url: "http://nmap.org/dist/{{ nmap_file }}"
 ncftpclient_dir: "ncftp-3.2.5" 
 ncftpclient_file: "{{ ncftpclient_dir }}-src.tar.bz2"
 ncftpclient_url: "ftp://ftp.ncftp.com/ncftp/{{ ncftpclient_file }}"
-nagios_plugins_file: "nagios-plugins-2.0.3.tar.gz"
+nagios_plugins_dir: "nagios-plugins-2.0.3"
+nagios_plugins_file: "{{ nagios_plugins_dir }}.tar.gz"
 nagios_plugins_url: "http://www.nagios-plugins.org/download/{{ nagios_plugins_file }}"
 
