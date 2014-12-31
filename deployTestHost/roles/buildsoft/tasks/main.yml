@@ -50,16 +50,16 @@
   git: repo={{ iperf_repo }} dest={{ temp_dir }}/iperf accept_hostkey=True depth=1
 
 - name: Retrieve Scapy
-  get_url: url={{ scapy_dl }} dest={{ temp_dir }}
+  get_url: url={{ scapy_url }} dest={{ temp_dir }}
 
 - name: Retrieve golang
-  get_url: url={{ golang_dl }} dest={{ temp_dir }}
+  get_url: url={{ golang_url }} dest={{ temp_dir }}
 
 - name: Retrieve nmap
-  get_url: url={{ nmap_dl }} dest={{ temp_dir }}
+  get_url: url={{ nmap_url }} dest={{ temp_dir }}
 
 - name: Retrieve ncftpclient
-  get_url: url={{ ncftpclient_dl }} dest={{ temp_dir }}
+  get_url: url={{ ncftpclient_url }} dest={{ temp_dir }}
 
 - name: Retrieve Nagios Plugins
-  get_url: url={{ nagios_plugins }} dest={{ temp_dir }}
+  get_url: url={{ nagios_plugins_url }} dest={{ temp_dir }}
