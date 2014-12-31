@@ -112,7 +112,7 @@
   get_url: url={{ nmap_url }} dest={{ temp_dir }}
 
 - name: Unpack NMAP
-  shell: chdir={{ temp_dir }} unzip {{ nmap_file }} creates={{ nmap_dir }}
+  shell: chdir={{ temp_dir }} tar -xf {{ nmap_file }} creates={{ nmap_dir }}
 
 - name: Build and Install NMAP
   shell: chdir={{ temp_dir }}/{{ nmap_dir }} ./configure && make && make install creates=/usr/local/bin/nmap
