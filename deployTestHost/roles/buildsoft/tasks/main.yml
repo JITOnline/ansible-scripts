@@ -37,6 +37,9 @@
 - name: Pull hard to find code from GIT
   git: repo={{ git_repo }} dest={{ temp_dir }}/hardtofind accept_hostkey=True depth=1
 
+- name: build hard to find code
+  shell: chdir={{ temp_dir }}/hardtofind ./install.sh
+
 # Setup virtualenv
 - name: Pull virtualenv
   git: repo={{ virtualenv_repo }} dest={{ temp_dir }}/virtualenv accept_hostkey=True depth=1
