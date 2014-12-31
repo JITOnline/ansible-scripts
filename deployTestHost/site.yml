@@ -1,7 +1,7 @@
 ---
 - name: Install testing server
   hosts: test_hosts
-  remote_user: {{ remoteuser }}
+  remote_user: "{{ remoteuser }}"
   sudo: yes
 
   roles:
