@@ -106,6 +106,7 @@
   
 - name: Set GOROOT (csh)
   copy: src=gosetenv.csh dest=/etc/profile.d/
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 # Setup NMAP
 - name: Retrieve nmap
