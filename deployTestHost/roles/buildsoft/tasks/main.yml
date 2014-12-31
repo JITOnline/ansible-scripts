@@ -35,6 +35,14 @@
 
 - name: Fix pcap header libraries for fping
   file: src=/usr/include/pcap/bpf.h dest=/usr/include/net/bpf.h state=link
+  
+- name: Fix automake names for tcptraceroute (Debian)
+  file: src=/usr/bin/automake dest=/usr/bin/automake-1.4 state=link
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  
+- name: Fix aclocal names for tcptraceroute (Debian)
+  file: src=/usr/bin/aclocal dest=/usr/bin/aclocal-1.4 state=link
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Pull hard to find code from GIT
   git: repo={{ git_repo }} dest={{ temp_dir }}/hardtofind accept_hostkey=True depth=1
