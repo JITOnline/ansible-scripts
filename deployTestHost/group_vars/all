@@ -9,7 +9,8 @@ fping_repo: https://github.com/schweikert/fping.git
 tcpreplay_repo: https://github.com/synfinatic/tcpreplay.git
 iperf_repo: https://github.com/esnet/iperf.git
 
-scapy_file: scapy-2.3.1.zip
+scapy_dir: scapy-2.3.1
+scapy_file: {{ scapy_dir }}.zip
 scapy_url: http://bb.secdev.org/scapy/downloads/{{ scapy_file }}
 golang_file: go1.4.linux-amd64.tar.gz
 golang_url: https://storage.googleapis.com/golang/{{ golang_file }}
