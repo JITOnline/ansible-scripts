@@ -22,6 +22,7 @@
    - bison
    - flex
    - libnet1-dev
+   - texinfo
   when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: "Install PreReq RHEL/CentOS"
