@@ -1,4 +1,4 @@
-temp_dir: "/var/tmp"
+temp_dir: "/var/tmp/install"
 remoteuser: "ubuntu"
 
 git_repo: "https://github.com/jbackman/hardtofindcode.git"
