@@ -74,10 +74,10 @@
   file: src=/usr/local/{{ golang_dir }} dest=/usr/local/go state=link
 
 - name: Set GOROOT (shell)
-  copy: src=go.sh dest=/etc/profile.d/
+  copy: src=gosetenv.sh dest=/etc/profile.d/
   
 - name: Set GOROOT (csh)
-  copy: src=go.csh dest=/etc/profile.d/
+  copy: src=gosetenv.csh dest=/etc/profile.d/
 
 - name: Retrieve nmap
   get_url: url={{ nmap_url }} dest={{ temp_dir }}
