@@ -51,6 +51,9 @@
 
 - name: Retrieve Scapy
   get_url: url={{ scapy_url }} dest={{ temp_dir }}
+  
+- name: Unpack Scapy
+  shell: chdir={{ temp_dir }} unzip {{ scapy_file }} creates={{ scapy_dir }}
 
 - name: Retrieve golang
   get_url: url={{ golang_url }} dest={{ temp_dir }}
