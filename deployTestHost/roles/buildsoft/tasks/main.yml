@@ -32,6 +32,13 @@
    - unzip
    - automake
    - openssl-devel
+   - tcl-devel
+   - libpcap-devel
+   - gnutls-devel
+   - mysql-devel
+   - cmake
+   - texinfo
+   - libnet-devel
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Fix pcap header libraries for fping
