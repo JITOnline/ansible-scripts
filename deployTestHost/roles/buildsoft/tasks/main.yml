@@ -120,7 +120,7 @@
   shell: chdir={{ temp_dir }} tar -xf {{ tcpreplay_file }} creates={{ tcpreplay_dir }}
   
 - name: Install TCP Replay
-  shell: chdir={{ temp_dir }}/{{ tcpreplay_dir }} ./configure && make && make install creates=/usr/local/bin/tcpreplay
+  shell: chdir={{ temp_dir }}/{{ tcpreplay_dir }} ./configure --enable-dynamic-link && make && make install creates=/usr/local/bin/tcpreplay
 
 # Setup Scapy
 - name: Retrieve Scapy
