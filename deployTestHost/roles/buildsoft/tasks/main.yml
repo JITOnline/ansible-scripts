@@ -137,3 +137,40 @@
   
 - name: Build Nagios Plugins 
   shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }} ./configure && make
+  
+- name: Install Root Nagios Plugins
+  shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }}/plugins-root/{{ item }} /usr/local/sbin/{{ item }}
+  with_items:
+   - check_icmp
+   - check_dhcp
+   
+- name: Install Other Nagios Plugins
+  shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }}/plugins-root/{{ item }} /usr/local/bin/{{ item }}
+  with_items:
+   - check_dig
+   - check_dns
+   - check_http
+   - check_mysql
+   - check_mysql_query
+   - check_ntp
+   - check_ntp_peer
+   - check_ntp_time
+   - check_ping
+   - check_smtp
+   - check_ssh
+   - check_tcp
+   
+- name: Install Other Nagios Plugins Symlinks
+  file: src=/usr/local/bin/check_tcp dest=/usr/local/bin/{{ item }} state=link
+  with_items: 
+  - check_ftp
+  - check_imap
+  - check_jabber
+  - check_nntp
+  - check_nntps
+  - check_pop
+  - check_simap
+  - check_spop
+  - check_ssmtp
+  - check_udp
+  - check_udp
