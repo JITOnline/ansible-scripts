@@ -1,10 +1,10 @@
 temp_dir: "/var/tmp/install"
 remoteuser: "ubuntu"
 
-git_repo: "https://github.com/jbackman/hardtofindcode.git"
+git_repo: "https://github.com/JITOnline/hardtofindcode.git"
 virtualenv_repo: "https://github.com/pypa/virtualenv.git"
 hping_repo: "https://github.com/antirez/hping.git"
-tcptraceroute_repo: "https://github.com/mct/tcptraceroute.git"
+tcptraceroute_repo: "https://github.com/JITOnline/tcptraceroute.git"
 fping_repo: "https://github.com/schweikert/fping.git"
 tcpreplay_repo: "https://github.com/synfinatic/tcpreplay.git"
 iperf_repo: "https://github.com/esnet/iperf.git"
