@@ -105,19 +105,22 @@
 - name: Compile and install fping
   shell: chdir={{ temp_dir }}/fping ./autogen.sh && ./configure && make && make install creates=/usr/local/sbin/fping 
 
-# Setup tcpreplay
-- name: Pull tcpreplay
-  git: repo={{ tcpreplay_repo }} dest={{ temp_dir }}/tcpreplay accept_hostkey=True depth=1
-  
-- name: Compile and install tcpreplay
-  shell: chdir={{ temp_dir }}/tcpreplay ./autogen.sh && ./configure --enable-dynamic-link && make && make install 
-
 # Setup iperf
 - name: Pull iperf
   git: repo={{ iperf_repo }} dest={{ temp_dir }}/iperf accept_hostkey=True depth=1
   
 - name: Compile and install iperf
   shell: chdir={{ temp_dir }}/iperf ./configure && make && make install creates=/usr/local/bin/iperf3
+  
+# Setup tcpreplay
+- name: Retrieve TCP Replay
+  get_url: url={{ tcpreplay_url }} dest={{ temp_dir }}
+  
+- name: Unpack TCP Replay
+  shell: chdir={{ temp_dir }} tar -xf {{ tcpreplay_file }} creates={{ tcpreplay_dir }}
+  
+- name: Install TCP Replay
+  shell: chdir={{ temp_dir }}/{{ tcpreplay_dir }} ./configure && make && make install creates=/usr/local/bin/tcpreplay
 
 # Setup Scapy
 - name: Retrieve Scapy
