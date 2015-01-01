@@ -39,6 +39,8 @@
    - cmake
    - texinfo
    - libnet-devel
+   - pam-devel
+   - python-devel
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Fix pcap header libraries for fping
