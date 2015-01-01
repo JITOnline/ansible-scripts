@@ -53,9 +53,6 @@
    - autogen
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Fix pcap header libraries for fping
-  file: src=/usr/include/pcap/bpf.h dest=/usr/include/net/bpf.h state=link
-
 - name: Pull hard to find code from GIT
   git: repo={{ git_repo }} dest={{ temp_dir }}/hardtofind accept_hostkey=True depth=1
 
@@ -73,11 +70,17 @@
   shell: chdir=/usr/local/virtualenv python {{ temp_dir }}/virtualenv/virtualenv.py /usr/local/virtualenv creates=/usr/local/virtualenv/bin/activate
 
 # Setup hping
+- name: Create temporary link for compiling hping
+  file: src=/usr/include/pcap/bpf.h dest=/usr/include/net/bpf.h state=link
+  
 - name: Pull hping
   git: repo={{ hping_repo }} dest={{ temp_dir }}/hping accept_hostkey=True depth=1
 
 - name: Compile and install hping
   shell: chdir={{ temp_dir }}/hping ./configure && make && make strip && make install creates=/usr/sbin/hping3
+
+- name: Remove temporary link
+  file: dest=/usr/include/net/bpf.h state=absent
 
 # Setup tcptraceroute
 - name: Pull tcptraceroute
