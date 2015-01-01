@@ -51,6 +51,7 @@
    - tcpdump
    - libevent-devel
    - autogen
+   - bind-utils
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Pull hard to find code from GIT
@@ -114,6 +115,9 @@
 # Setup iperf
 - name: Pull iperf
   git: repo={{ iperf_repo }} dest={{ temp_dir }}/iperf accept_hostkey=True depth=1
+  
+- name: Compile and install iperf
+  shell: chdir={{ temp_dir }}/iperf ./autogen.sh && ./configure && make && make install creates=/usr/local/bin/iperf3
 
 # Setup Scapy
 - name: Retrieve Scapy
