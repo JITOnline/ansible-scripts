@@ -106,7 +106,7 @@
   git: repo={{ tcpreplay_repo }} dest={{ temp_dir }}/tcpreplay accept_hostkey=True depth=1
   
 - name: Comiple and install tcpreplay
-shell: chdir={{ temp_dir }}/tcpreplay cmake -G "Unix Makefiles" && make && make install 
+shell: chdir={{ temp_dir }}/tcpreplay cmake -G 'Unix Makefiles' && make && make install 
 
 # Setup iperf
 - name: Pull iperf
