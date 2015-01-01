@@ -58,11 +58,14 @@
   shell: chdir={{ temp_dir }}/hardtofind ./install.sh creates=/usr/local/bin/unicornscan
 
 # Setup virtualenv
-- name: Pull virtualenv
+- name: Create virtualenv directory
+  file:  dest=/usr/local/bin/virtualenv state=directory
+  
+- name: Pull virtualenv (Ubuntu)
   git: repo={{ virtualenv_repo }} dest={{ temp_dir }}/virtualenv accept_hostkey=True depth=1
 
-- name: Deploy virtualenv
-  shell: chdir=/usr/local python {{ temp_dir }}/virtualenv/virtualenv.py . creates=/usr/local/bin/activate
+- name: Deploy virtualenv (Ubuntu)
+  shell: chdir=/usr/local/virtualenv python {{ temp_dir }}/virtualenv/virtualenv.py /usr/local/virtualenv creates=/usr/local/virtualenv/bin/activate
 
 # Setup hping
 - name: Pull hping
