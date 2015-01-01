@@ -1,0 +1,8 @@
+---
+- name: Install OpenVPN
+  hosts: openvpn_hosts
+  remote_user: "{{ remoteuser }}"
+  sudo: yes
+
+  roles:
+    - common

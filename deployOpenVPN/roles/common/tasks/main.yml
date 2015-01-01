@@ -1,0 +1,21 @@
+---
+- name: Perform APT update
+  apt: upgrade=dist
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install Software
+  apt: name={{ item }} state=present install_recommends=yes
+  with_items:
+   - ntp
+   - libpam-google-authenticator
+   - knockd
+   - easy-rsa
+   - openvpn
+   - lighttpd
+   - pwgen
+   - zip
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Copy Backup to host
+  copy: src={{ backup_file }} dest={{ temp_dir }} owner=root group=root mode=600
+

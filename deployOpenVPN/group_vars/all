@@ -1,0 +1,3 @@
+temp_dir: "/var/tmp"
+backup_file: "backup.zip"
+remoteuser: "ubuntu"
