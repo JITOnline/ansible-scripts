@@ -139,13 +139,13 @@
   shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }} ./configure && make
   
 - name: Install Root Nagios Plugins
-  shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }}/plugins-root/{{ item }} /usr/local/sbin/{{ item }}
+  shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }}/plugins-root cp {{ item }} /usr/local/sbin/{{ item }}
   with_items:
    - check_icmp
    - check_dhcp
    
 - name: Install Other Nagios Plugins
-  shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }}/plugins-root/{{ item }} /usr/local/bin/{{ item }}
+  shell: chdir={{ temp_dir }}/{{ nagios_plugins_dir }}/plugins cp {{ item }} /usr/local/bin/{{ item }}
   with_items:
    - check_dig
    - check_dns
