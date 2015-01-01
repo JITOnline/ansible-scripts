@@ -23,6 +23,8 @@
    - flex
    - libnet1-dev
    - texinfo
+   - tcpdump
+   - autogen
   when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: "Install PreReq RHEL/CentOS"
@@ -46,6 +48,9 @@
    - openssl-devel 
    - ncurses-devel
    - python-dateutil
+   - tcpdump
+   - libevent-devel
+   - autogen
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Fix pcap header libraries for fping
@@ -93,9 +98,15 @@
 - name: Pull fping
   git: repo={{ fping_repo }} dest={{ temp_dir }}/fping accept_hostkey=True depth=1
 
+- name: Compile and install fping
+  shell: chdir={{ temp_dir }}/fping ./autogen.sh && ./configure && make && make install creates=/usr/local/sbin/fping 
+
 # Setup tcpreplay
 - name: Pull tcpreplay
   git: repo={{ tcpreplay_repo }} dest={{ temp_dir }}/tcpreplay accept_hostkey=True depth=1
+  
+- name: Comiple and install tcpreplay
+shell: chdir={{ temp_dir }}/tcpreplay cmake -G "Unix Makefiles" && make && make install 
 
 # Setup iperf
 - name: Pull iperf
