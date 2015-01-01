@@ -41,6 +41,10 @@
    - libnet-devel
    - pam-devel
    - python-devel
+   - zlib-devel 
+   - bzip2-devel 
+   - openssl-devel 
+   - ncurses-devel
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Fix pcap header libraries for fping
