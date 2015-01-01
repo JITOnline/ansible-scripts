@@ -117,7 +117,7 @@
   git: repo={{ iperf_repo }} dest={{ temp_dir }}/iperf accept_hostkey=True depth=1
   
 - name: Compile and install iperf
-  shell: chdir={{ temp_dir }}/iperf ./autogen.sh && ./configure && make && make install creates=/usr/local/bin/iperf3
+  shell: chdir={{ temp_dir }}/iperf ./configure && make && make install creates=/usr/local/bin/iperf3
 
 # Setup Scapy
 - name: Retrieve Scapy
