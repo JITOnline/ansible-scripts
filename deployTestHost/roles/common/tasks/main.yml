@@ -24,7 +24,7 @@
   lineinfile: dest=/etc/sysctl.conf state=present line="net.ipv6.conf.lo.disable_ipv6 = 1" 
 
 - name: "Disable Selinux RHEL/Centos"
-  replace: dest=/etc/sysconfig/selinux regex='^SELINUX=.*' replace='SELINUX=disabled'
+  replace: dest=/etc/sysconfig/selinux regexp='^SELINUX=.*' replace='SELINUX=disabled'
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: "Install Debian services"
