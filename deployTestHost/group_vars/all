@@ -6,7 +6,7 @@ virtualenv_repo: "https://github.com/pypa/virtualenv.git"
 hping_repo: "https://github.com/antirez/hping.git"
 tcptraceroute_repo: "https://github.com/JITOnline/tcptraceroute.git"
 fping_repo: "https://github.com/schweikert/fping.git"
-tcpreplay_repo: "https://github.com/synfinatic/tcpreplay.git"
+tcpreplay_repo: "https://github.com/appneta/tcpreplay.git"
 iperf_repo: "https://github.com/esnet/iperf.git"
 
 scapy_dir: "scapy-2.3.1"
