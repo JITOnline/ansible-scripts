@@ -45,6 +45,7 @@
    - bzip2-devel 
    - openssl-devel 
    - ncurses-devel
+   - python-dateutil
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Fix pcap header libraries for fping
