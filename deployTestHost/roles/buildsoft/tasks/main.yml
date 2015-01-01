@@ -59,7 +59,7 @@
 
 # Setup virtualenv
 - name: Create virtualenv directory
-  file:  dest=/usr/local/bin/virtualenv state=directory
+  file:  dest=/usr/local/virtualenv state=directory
   
 - name: Pull virtualenv (Ubuntu)
   git: repo={{ virtualenv_repo }} dest={{ temp_dir }}/virtualenv accept_hostkey=True depth=1
