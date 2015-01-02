@@ -43,7 +43,7 @@
 
 - name: "Set Ubuntu SSH Server Config"
   copy: src=ubuntu_sshd_config dest=/etc/ssh/sshd_config
-  notify: restart sshd
+  notify: restart ssh
   when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: "Set Centos/RHEL SSH Server Config"
