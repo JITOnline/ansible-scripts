@@ -39,6 +39,10 @@
 - name: " Google Authenticator"
   copy: src=centos_sshd_config dest=/etc/ssh/sshd_config
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Set up Google Authenticator PAM (Ubuntu)"
+  lineinfile: dest=/etc/pam.d/sshd insertafter="^# PAM configuration" line="auth       required     /usr/local/lib/security/pam_google_authenticator.so nullok"
+  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   
 - name: "Set up Google Authenticator PAM (CentOS/RHEL)"
   lineinfile: dest=/etc/pam.d/sshd insertafter="^#%PAM-1.0" line="auth       required     /usr/local/lib/security/pam_google_authenticator.so nullok"
