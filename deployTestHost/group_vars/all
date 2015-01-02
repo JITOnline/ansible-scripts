@@ -8,6 +8,7 @@ tcptraceroute_repo: "https://github.com/JITOnline/tcptraceroute.git"
 fping_repo: "https://github.com/schweikert/fping.git"
 iperf_repo: "https://github.com/esnet/iperf.git"
 knockd_repo: "https://github.com/jvinet/knock.git"
+googleauth_repo: "https://github.com/google/google-authenticator.git"
 
 
 scapy_dir: "scapy-2.3.1"
