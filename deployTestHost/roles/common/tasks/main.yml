@@ -50,3 +50,7 @@
   copy: src=centos_sshd_config dest=/etc/ssh/sshd_config
   notify: restart sshd
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Set up Google Authenticator (CentOS/RHEL)
+  lineinfile: dest=/etc/pam.d/sshd insertafter="^#%PAM-1.0" line="auth       required     /usr/local/lib/security/pam_google_authenticator.so nullok"
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
