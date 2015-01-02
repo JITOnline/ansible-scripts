@@ -23,16 +23,10 @@
 - name: "Disable IPv6 part 3"
   lineinfile: dest=/etc/sysctl.conf state=present line="net.ipv6.conf.lo.disable_ipv6 = 1" 
 
-- name: "Disable Selinux RHEL/Centos"
-  replace: dest=/etc/sysconfig/selinux regexp='^SELINUX=.*' replace='SELINUX=disabled'
-  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-
 - name: "Install Debian services"
   apt: name={{ item }} state=present
   with_items:
    - ntp
-   - libpam-google-authenticator
-   - knockd
   when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: "Install RHEL/CentOS services"
@@ -41,16 +35,3 @@
    - ntp
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: "Set Ubuntu SSH Server Config"
-  copy: src=ubuntu_sshd_config dest=/etc/ssh/sshd_config
-  notify: restart ssh
-  when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-- name: "Set Centos/RHEL SSH Server Config"
-  copy: src=centos_sshd_config dest=/etc/ssh/sshd_config
-  notify: restart sshd
-  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-
-- name: Set up Google Authenticator (CentOS/RHEL)
-  lineinfile: dest=/etc/pam.d/sshd insertafter="^#%PAM-1.0" line="auth       required     /usr/local/lib/security/pam_google_authenticator.so nullok"
-  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
