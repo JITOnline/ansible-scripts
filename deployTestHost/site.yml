@@ -7,3 +7,5 @@
   roles:
     - common
     - buildsoft
+    - security
+    - cleanup
