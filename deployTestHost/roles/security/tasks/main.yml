@@ -9,13 +9,8 @@
    - libpam-google-authenticator
    - knockd
   when:  ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-- name: "Install RHEL/CentOS services"
-  yum: name={{ item }} state=present
-  with_items:
-   - ntp
-  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-
+  
+# Setup SSH  
 - name: "Set Ubuntu SSH Server Config"
   copy: src=ubuntu_sshd_config dest=/etc/ssh/sshd_config
   notify: restart ssh
@@ -26,6 +21,25 @@
   notify: restart sshd
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- name: Set up Google Authenticator (CentOS/RHEL)
+# Setup knockd
+
+- name: "Pull knockd"
+  git: repo={{ knockd_repo }} dest={{ temp_dir }}/knockd accept_hostkey=True depth=1
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Build knockd"
+  shell: chdir={{ temp_dir }}/knockd autoreconf -fi && ./configure && make && make install creates=/usr/local/sbin/knockd
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: "Create configuration file"
+  copy: src=knockd.conf dest=/etc/knockd.conf
+
+# Setup Google authenticator
+  
+- name: " Google Authenticator"
+  copy: src=centos_sshd_config dest=/etc/ssh/sshd_config
+  when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  
+- name: "Set up Google Authenticator PAM (CentOS/RHEL)"
   lineinfile: dest=/etc/pam.d/sshd insertafter="^#%PAM-1.0" line="auth       required     /usr/local/lib/security/pam_google_authenticator.so nullok"
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
