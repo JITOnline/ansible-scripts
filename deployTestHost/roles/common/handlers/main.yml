@@ -1,4 +1,8 @@
 - name: restart iptables
   service: name=iptables state=restarted
+# Ubuntu/Debian call the service ssh
+- name: restart ssh
+  service: name=ssh state=restarted 
+# CentOS/RHEL call the service sshd
 - name: restart sshd
-  service: name=ssh state=restarted
+  service: name=sshd state=restarted
