@@ -52,6 +52,15 @@
    - libevent-devel
    - autogen
    - bind-utils
+   - lynx
+   - yum-cron
+   - whois
+   - mtr
+   - nc
+   - finger
+   - telnet
+   - lsof
+   - ftp
   when:  ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Pull hard to find code from GIT
