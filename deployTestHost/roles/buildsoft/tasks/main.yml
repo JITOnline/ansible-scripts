@@ -151,7 +151,7 @@
   git: repo={{ scapy_repo }} dest={{ temp_dir }}/scapy accept_hostkey=True depth=1
 
 - name: Install Scapy
-  shell: chdir={{ temp_dir }}/scapy python setup.py install && cp {{ temp_dir }}/{{ scapy_dir }}/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
+  shell: chdir={{ temp_dir }}/scapy python setup.py install && cp {{ temp_dir }}/scapy/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
 
 # Setup Golang
 - name: Retrieve golang
