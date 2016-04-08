@@ -94,6 +94,13 @@
 - name: Remove temporary link
   file: dest=/usr/include/net/bpf.h state=absent
 
+# Setup masscan
+- name: Pull masscan
+  git: repo={{ masscan_repo }} dest={{ temp_dir }}/masscan accept_hostkey=True depth=1
+  
+- name: Compile and install masscan
+  shell: chdir={{ temp_dir }}/masscan make -j && make install creates=/usr/bin/masscan
+
 # Setup tcptraceroute
 - name: Pull tcptraceroute
   git: repo={{ tcptraceroute_repo }} dest={{ temp_dir }}/tcptraceroute accept_hostkey=True depth=1
