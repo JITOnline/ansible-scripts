@@ -147,13 +147,10 @@
   
 # Setup Scapy
 - name: Retrieve Scapy
-  get_url: url={{ scapy_url }} dest={{ temp_dir }}
-  
-- name: Unpack Scapy
-  shell: chdir={{ temp_dir }} unzip {{ scapy_file }} creates={{ scapy_dir }}
-  
+  git: repo={{ scapy_repo }} dest={{ temp_dir }}/scapy accept_hostkey=True depth=1
+
 - name: Install Scapy
-  shell: chdir={{ temp_dir }}/{{ scapy_dir }} python setup.py install && cp {{ temp_dir }}/{{ scapy_dir }}/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
+  shell: chdir={{ temp_dir }}/scapy python setup.py install && cp {{ temp_dir }}/{{ scapy_dir }}/bin/scapy /usr/local/bin creates=/usr/local/bin/scapy
 
 # Setup Golang
 - name: Retrieve golang
