@@ -58,7 +58,8 @@
    - yum-cron
    - whois
    - mtr
-   - nmap-netcat
+   - nmap
+   - nc
    - finger
    - telnet
    - lsof
