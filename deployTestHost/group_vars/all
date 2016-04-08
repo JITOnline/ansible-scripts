@@ -9,6 +9,7 @@ fping_repo: "https://github.com/schweikert/fping.git"
 iperf_repo: "https://github.com/esnet/iperf.git"
 knockd_repo: "https://github.com/jvinet/knock.git"
 googleauth_repo: "https://github.com/google/google-authenticator.git"
+masscan_repo: "https://github.com/agreene5/masscan.git"
 
 
 scapy_dir: "scapy-2.3.1"
@@ -29,4 +30,3 @@ ncftpclient_url: "ftp://ftp.ncftp.com/ncftp/{{ ncftpclient_file }}"
 nagios_plugins_dir: "nagios-plugins-2.0.3"
 nagios_plugins_file: "{{ nagios_plugins_dir }}.tar.gz"
 nagios_plugins_url: "http://www.nagios-plugins.org/download/{{ nagios_plugins_file }}"
-
